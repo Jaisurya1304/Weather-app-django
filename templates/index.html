@@ -1,0 +1,47 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <a href="">WeatherApp</a>
+    <div class="container">
+        <header>
+            <h5>Weather in</h5>
+            <div class="search-grp">
+                <form action="{% url 'weather' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="city" placeholder="Type city name..." id="search-input" />
+                    <button type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+            <h3 id="city">{{ data.city }}</h3>
+            <h6 id="date"></h6>
+        </header>
+        <section {% if data %}style="display:block;"{% endif %}>
+            <div class="temperature">{{ data.temp }} °C</div>
+            <div class="description">
+                <img src="http://openweathermap.org/img/wn/{{ data.icon }}.png" alt="" id="description-img">
+                <div id="description-text">{{ data.description }}</div>
+            </div>
+            <div class="details">
+                <div id="humidity" class="grp">
+                    <span>Humidity</span>
+                    <h3 id="humidity-degree">{{ data.humidity }} %</h3>
+                </div>
+                <div id="feelslike" class="grp">
+                    <span>Feels like</span>
+                    <h3 id="feelslike-degree">{{ data.feels_like }} °C</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
