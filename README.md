@@ -1,2 +1,2 @@
-# Weather-app-flask
+# Weather-app-django
  
